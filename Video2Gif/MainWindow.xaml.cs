@@ -193,10 +193,12 @@ namespace Video2Gif
 
 			string startTime = TextBox_StartTime.Text;
 			string duration = TextBox_Duration.Text;
+			string resizeType = this.ComboBox_ResizeType.SelectedValue.ToString();
+			string curvePreset = this.ComboBox_Curve.SelectedValue.ToString();
 			this.output = this.TextBox_Output.Text;
 
 			// More filters here: https://ffmpeg.org/ffmpeg-all.html#toc-Video-Filters
-			this.filters = "fps=" + this.TextBox_Fps.Text + ",scale=" + this.TextBox_Width.Text + ":-1:flags=" + this.ComboBox_ResizeType.SelectedValue.ToString();
+			this.filters = @"curves=" + curvePreset + "," + "fps=" + this.TextBox_Fps.Text + ",scale=" + this.TextBox_Width.Text + ":-1:flags=" + resizeType;
 
 			// Use a palette
 			if ((bool)this.CheckBox_UsePalette.IsChecked) {
