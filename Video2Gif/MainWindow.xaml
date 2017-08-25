@@ -67,7 +67,7 @@
 			<System:String>spline</System:String>
 		</ComboBox>
 		<Label Content="Curve preset" HorizontalAlignment="Left" Margin="240,156,0,0" VerticalAlignment="Top" Width="225" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-		<ComboBox x:Name="ComboBox_Curve" HorizontalAlignment="Left" Margin="240,187,0,0" VerticalAlignment="Top" Width="225" Height="26" SelectedIndex="0" VerticalContentAlignment="Center">
+		<ComboBox x:Name="ComboBox_CurvePreset" HorizontalAlignment="Left" Margin="240,187,0,0" VerticalAlignment="Top" Width="225" Height="26" SelectedIndex="0" VerticalContentAlignment="Center">
 			<System:String>none</System:String>
 			<System:String>color_negative</System:String>
 			<System:String>cross_process</System:String>

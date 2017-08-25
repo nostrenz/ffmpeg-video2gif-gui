@@ -24,7 +24,6 @@ namespace Video2Gif
 			InitializeComponent();
 
 			this.TextBox_FFmepg.Text = Settings.Default.FFmpeg;
-
 			this.TextBox_Fps.Text = Settings.Default.Fps;
 			this.TextBox_StartTime.Text = Settings.Default.StartTime;
 			this.TextBox_Duration.Text = Settings.Default.Duration;
@@ -65,20 +64,16 @@ namespace Video2Gif
 		/// <summary>
 		/// Call FFmpeg to create a palette from the source video.
 		/// </summary>
-		/// <param name="startTime"></param>
-		/// <param name="duration"></param>
-		/// <param name="input"></param>
-		/// <param name="filters"></param>
-		private void CreatePalette(string startTime, string duration, string input, string filters)
+		private void CreatePalette()
 		{
-			string statsMode = this.ComboBox_StatsMode.SelectedValue.ToString();
-			string paletteGen = "palettegen=stats_mode=" + statsMode;
-
-			this.firstPart = String.Format(@"-ss {0} -t {1} -i ""{2}"" ", startTime, duration, input);
+			this.paletteUse = String.Format(
+				"paletteuse=dither={0}:diff_mode={1}:new={2}",
+				this.DitherWithScale, this.DiffMode, this.New
+			);
 
 			string arguments = String.Format(
-				this.firstPart + @"-vf ""{0},{1}"" -y ""{2}""",
-				filters, paletteGen, this.PalettePath
+				this.firstPart + @"-vf ""{0},palettegen=stats_mode={1}"" -y ""{2}""",
+				this.filters, this.StatsMode, this.PalettePath
 			);
 
 			this.AddpendLogBox(Settings.Default.FFmpeg + " " + arguments);
@@ -89,20 +84,20 @@ namespace Video2Gif
 		/// Call FFmpeg to create a gif from the source video.
 		/// A palette needs to be created first using CreatePalette().
 		/// </summary>
-		/// <param name="filters"></param>
-		private void CreateGif(string filters, bool usePalette=false)
+		/// <param name="paletteUse"></param>
+		private void CreateGif(string paletteUse=null)
 		{
 			string arguments = null;
 
-			if (usePalette) {
+			if (paletteUse != null) {
 				arguments = String.Format(
 					firstPart + @"-i ""{0}"" -lavfi ""{1}[x]; [x] [1:v] {2}"" -y ""{3}""",
-					this.PalettePath, filters, this.paletteUse, this.output
+					this.PalettePath, this.filters, paletteUse, this.output
 				);
 			} else {
 				arguments = String.Format(
 					firstPart + @"-lavfi ""{0}"" -y ""{1}""",
-					filters, this.output
+					this.filters, this.output
 				);
 			}
 
@@ -149,9 +144,94 @@ namespace Video2Gif
 
 		#region Accessor
 
+		private string Ffmpeg
+		{
+			get { return this.TextBox_FFmepg.Text; }
+		}
+
 		private string PalettePath
 		{
 			get { return App.appDir + @"\" + PALETTE; }
+		}
+
+		private string CurvePreset
+		{
+			get { return this.ComboBox_CurvePreset.SelectedValue.ToString(); }
+		}
+
+		private string ResizeType
+		{
+			get { return this.ComboBox_ResizeType.SelectedValue.ToString(); }
+		}
+
+		private string Fps
+		{
+			get { return this.TextBox_Fps.Text; }
+		}
+
+		private string Input
+		{
+			get { return this.TextBox_Input.Text; }
+		}
+
+		private string Output
+		{
+			get { return this.TextBox_Output.Text; }
+		}
+
+		private string SizeWidth
+		{
+			get { return this.TextBox_Width.Text; }
+		}
+
+		private string DiffMode
+		{
+			get { return (bool)this.RadioButton_DiffMode_Rectangle.IsChecked ? "rectangle" : "none"; }
+		}
+
+		private string BayerScale
+		{
+			get { return this.ComboBox_BayerScale.SelectedValue.ToString(); }
+		}
+
+		private string Dither
+		{
+			get { return this.ComboBox_Dither.SelectedValue.ToString(); }
+		}
+
+		private string DitherWithScale
+		{
+			get
+			{
+				string dither = this.Dither;
+
+				// The bayer dither needs a scale option
+				if (dither == "bayer") {
+					dither += ":bayer_scale=" + this.BayerScale;
+				}
+
+				return dither;
+			}
+		}
+
+		private string New
+		{
+			get { return (bool)this.CheckBox_New.IsChecked ? "1" : "0"; }
+		}
+
+		private string StatsMode
+		{
+			get { return this.ComboBox_StatsMode.SelectedValue.ToString(); }
+		}
+
+		private string StartTime
+		{
+			get { return this.TextBox_StartTime.Text; }
+		}
+
+		private string Duration
+		{
+			get { return this.TextBox_Duration.Text; }
 		}
 
 		#endregion Accessor
@@ -171,7 +251,8 @@ namespace Video2Gif
 		/// <param name="e"></param>
 		private void Button_Convert_Click(object sender, RoutedEventArgs e)
 		{
-			string ffmpeg = this.TextBox_FFmepg.Text;
+			string ffmpeg = this.Ffmpeg;
+			this.output = this.Output;
 
 			if (!File.Exists(ffmpeg)) {
 				MessageBox.Show("Bad FFmpeg path.");
@@ -183,7 +264,7 @@ namespace Video2Gif
 			Settings.Default.FFmpeg = ffmpeg;
 			Settings.Default.Save();
 
-			string input = this.TextBox_Input.Text;
+			string input = this.Input;
 
 			if (!File.Exists(input)) {
 				MessageBox.Show("Input file does not exists.");
@@ -191,40 +272,22 @@ namespace Video2Gif
 				return;
 			}
 
-			string startTime = TextBox_StartTime.Text;
-			string duration = TextBox_Duration.Text;
-			string resizeType = this.ComboBox_ResizeType.SelectedValue.ToString();
-			string curvePreset = this.ComboBox_Curve.SelectedValue.ToString();
-			this.output = this.TextBox_Output.Text;
+			this.firstPart = String.Format(
+				@"-ss {0} -t {1} -i ""{2}"" ",
+				this.StartTime, this.Duration, input
+			);
 
-			// More filters here: https://ffmpeg.org/ffmpeg-all.html#toc-Video-Filters
-			this.filters = @"curves=" + curvePreset + "," + "fps=" + this.TextBox_Fps.Text + ",scale=" + this.TextBox_Width.Text + ":-1:flags=" + resizeType;
+			// More filters here: https://ffmpeg.org/ffmpeg-filters.html#Video-Filters
+			this.filters = String.Format(
+				"curves={0},fps={1},scale={2}:-1:flags={3}",
+				this.CurvePreset, this.Fps, this.SizeWidth, this.ResizeType
+			);
 
 			// Use a palette
 			if ((bool)this.CheckBox_UsePalette.IsChecked) {
-				// "bayer:bayer_scale=$USE_BAYERSCALE", "floyd_steinberg", "sierra2", "sierra2_4a" (default), "none", "heckbert" (not recommended)
-				string dither = this.ComboBox_Dither.SelectedValue.ToString();
-
-				// "rectangle" (better when only a part of the image is moving) or "none" (default)
-				string diffMode = (bool)this.RadioButton_DiffMode_Rectangle.IsChecked ? "rectangle" : "none";
-
-				if (dither == "bayer") {
-					// Only used when dither bayer, a number between 1 and 5, 1 more appearant and 5 is better quality
-					string bayerScale = this.ComboBox_BayerScale.SelectedValue.ToString();
-
-					dither += ":bayer_scale=" + bayerScale;
-				}
-
-				this.paletteUse = String.Format(
-					"paletteuse=dither={0}:diff_mode={1}:new={2}",
-					dither, diffMode, (bool)this.CheckBox_New.IsChecked ? "1" : "0"
-				);
-
-				this.CreatePalette(startTime, duration, input, filters);
+				this.CreatePalette();
 			} else { // Do not use a palette
-				this.firstPart = String.Format(@"-ss {0} -t {1} -i ""{2}"" ", startTime, duration, input);
-
-				this.CreateGif(this.filters, false);
+				this.CreateGif();
 			}
 
 			this.TextBlock_Logs.Text = "";
@@ -245,7 +308,7 @@ namespace Video2Gif
 				return;
 			}
 
-			this.CreateGif(this.filters, true);
+			this.CreateGif(this.paletteUse);
 		}
 
 		/// <summary>
@@ -265,11 +328,11 @@ namespace Video2Gif
 				this.ProgressBar.IsIndeterminate = false;
 				this.Button_Convert.IsEnabled = true;
 
-				Settings.Default.Fps = this.TextBox_Fps.Text;
-				Settings.Default.StartTime = this.TextBox_StartTime.Text;
-				Settings.Default.Duration = TextBox_Duration.Text;
-				Settings.Default.Input = this.TextBox_Input.Text;
-				Settings.Default.Output = this.TextBox_Output.Text;
+				Settings.Default.Fps = this.Fps;
+				Settings.Default.StartTime = this.StartTime;
+				Settings.Default.Duration = this.Duration;
+				Settings.Default.Input = this.Input;
+				Settings.Default.Output = this.Output;
 
 				Settings.Default.Save();
 			}), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
@@ -303,8 +366,7 @@ namespace Video2Gif
 
 				string dirName = System.IO.Directory.GetParent(file).FullName;
 
-				this.output = dirName + @"\out.gif";
-				this.TextBox_Output.Text = this.output;
+				this.TextBox_Output.Text = dirName + @"\out.gif";
 			}
 		}
 
@@ -315,7 +377,7 @@ namespace Video2Gif
 		/// <param name="e"></param>
 		private void ComboBox_Dither_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
-			this.ComboBox_BayerScale.IsEnabled = (this.ComboBox_Dither.SelectedValue.ToString() == "bayer");
+			this.ComboBox_BayerScale.IsEnabled = (this.Dither == "bayer");
 		}
 
 		/// <summary>
