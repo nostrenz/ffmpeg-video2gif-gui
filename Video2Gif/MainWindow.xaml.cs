@@ -185,6 +185,8 @@ namespace Video2Gif
 			string startTime = TextBox_StartTime.Text;
 			string duration = TextBox_Duration.Text;
 			this.output = this.TextBox_Output.Text;
+
+			// More filters here: https://ffmpeg.org/ffmpeg-all.html#toc-Video-Filters
 			this.filters = "fps=" + this.TextBox_Fps.Text + ",scale=" + this.TextBox_Width.Text + ":-1:flags=lanczos";
 
 			// "bayer:bayer_scale=$USE_BAYERSCALE", "floyd_steinberg", "sierra2", "sierra2_4a" (default), "none", "heckbert" (not recommended)
