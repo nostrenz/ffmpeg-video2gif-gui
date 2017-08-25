@@ -4,17 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Video2Gif.MainWindow"
+		xmlns:Element="clr-namespace:Video2Gif" 
         mc:Ignorable="d"
         Title="Video2Gif" Height="447.614" Width="614.268" ResizeMode="CanMinimize">
 	<Grid>
 		<TextBox x:Name="TextBox_FFmepg" Height="23" Margin="10,10,30,0" TextWrapping="Wrap" Text="ffmpeg.exe" VerticalAlignment="Top"/>
-		<TextBox x:Name="TextBox_Fps" HorizontalAlignment="Left" Height="26" Margin="70,102,0,0" TextWrapping="Wrap" Text="15" VerticalAlignment="Top" Width="73" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+		<Element:NumericField x:Name="TextBox_Fps" HorizontalAlignment="Left" Height="26" Margin="70,102,0,0" Text="15" Number="15" VerticalAlignment="Top" Width="73"/>
 		<Label Content="FPS" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="55" Height="26"/>
 		<TextBox x:Name="TextBox_StartTime" HorizontalAlignment="Left" Height="26" Margin="70,133,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="73" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 		<Label Content="Start" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top" Width="55" Height="26"/>
 		<TextBox x:Name="TextBox_Duration" HorizontalAlignment="Left" Height="26" Margin="70,164,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="73" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 		<Label Content="Duration" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" Width="55" Height="26"/>
-		<TextBox x:Name="TextBox_Width" HorizontalAlignment="Left" Height="26" Margin="70,195,0,0" TextWrapping="Wrap" Text="480" VerticalAlignment="Top" Width="73" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+		<Element:NumericField x:Name="TextBox_Width" HorizontalAlignment="Left" Height="26" Margin="70,195,0,0" VerticalAlignment="Top" Width="73" Text="480" Number="480"/>
 		<Label Content="Width" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="55" Height="26"/>
 		<TextBox x:Name="TextBox_Output" Height="23" Margin="10,66,10,0" TextWrapping="Wrap" Text="out.gif" VerticalAlignment="Top"/>
 		<Label Content="Stats mode" HorizontalAlignment="Left" Margin="154,102,0,0" VerticalAlignment="Top" Height="26" Width="66" RenderTransformOrigin="-0.012,0.785"/>
@@ -45,6 +46,6 @@
 		<RadioButton x:Name="RadioButton_DiffMode_Rectangle" Content="Rectangle (better when only some parts are moving)" HorizontalAlignment="Left" Margin="284,201,0,0" VerticalAlignment="Top" Height="15" Width="314" GroupName="DiffMode"/>
 		<Button Content="..." Margin="0,38,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Input_Click" HorizontalAlignment="Right" Width="15"/>
 		<Button Content="..." Margin="0,10,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Ffmpeg_Click" HorizontalAlignment="Right" Width="15"/>
-		<TextBox x:Name="TextBlock_Logs" Margin="10,0,10,76" TextWrapping="Wrap" Foreground="White" Background="Black" Height="102" VerticalAlignment="Bottom"/>
+		<TextBox x:Name="TextBlock_Logs" Margin="10,0,10,76" TextWrapping="Wrap" Foreground="White" Background="Black" Height="102" VerticalAlignment="Bottom" IsReadOnly="True"/>
 	</Grid>
 </Window>
