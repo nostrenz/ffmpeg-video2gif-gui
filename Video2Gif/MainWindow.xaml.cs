@@ -205,7 +205,7 @@ namespace Video2Gif
 			this.CreatePalette(startTime, duration, input, filters);
 
 			this.TextBlock_Logs.Text = "";
-			this.Button_Convert.IsEnabled = true;
+			this.Button_Convert.IsEnabled = false;
 			this.ProgressBar.IsIndeterminate = true;
 		}
 
