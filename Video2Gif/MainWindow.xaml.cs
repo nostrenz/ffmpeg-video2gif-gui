@@ -24,6 +24,12 @@ namespace Video2Gif
 			InitializeComponent();
 
 			this.TextBox_FFmepg.Text = Settings.Default.FFmpeg;
+
+			this.TextBox_Fps.Text = Settings.Default.Fps;
+			this.TextBox_StartTime.Text = Settings.Default.StartTime;
+			this.TextBox_Duration.Text = Settings.Default.Duration;
+			this.TextBox_Input.Text = Settings.Default.Input;
+			this.TextBox_Output.Text = Settings.Default.Output;
 		}
 
 		/*
@@ -231,6 +237,14 @@ namespace Video2Gif
 			Dispatcher.BeginInvoke(new Action(delegate {
 				this.ProgressBar.IsIndeterminate = false;
 				this.Button_Convert.IsEnabled = true;
+
+				Settings.Default.Fps = this.TextBox_Fps.Text;
+				Settings.Default.StartTime = this.TextBox_StartTime.Text;
+				Settings.Default.Duration = TextBox_Duration.Text;
+				Settings.Default.Input = this.TextBox_Input.Text;
+				Settings.Default.Output = this.TextBox_Output.Text;
+
+				Settings.Default.Save();
 			}), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
 		}
 

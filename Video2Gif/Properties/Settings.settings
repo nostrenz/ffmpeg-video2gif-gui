@@ -5,5 +5,20 @@
     <Setting Name="FFmpeg" Type="System.String" Scope="User">
       <Value Profile="(Default)">ffmpeg.exe</Value>
     </Setting>
+    <Setting Name="StartTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">00:00</Value>
+    </Setting>
+    <Setting Name="Duration" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="Input" Type="System.String" Scope="User">
+      <Value Profile="(Default)">in.mp4</Value>
+    </Setting>
+    <Setting Name="Output" Type="System.String" Scope="User">
+      <Value Profile="(Default)">out.gif</Value>
+    </Setting>
+    <Setting Name="Fps" Type="System.String" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

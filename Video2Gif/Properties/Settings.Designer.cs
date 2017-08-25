@@ -34,5 +34,65 @@ namespace Video2Gif.Properties {
                 this["FFmpeg"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00")]
+        public string StartTime {
+            get {
+                return ((string)(this["StartTime"]));
+            }
+            set {
+                this["StartTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public string Duration {
+            get {
+                return ((string)(this["Duration"]));
+            }
+            set {
+                this["Duration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("in.mp4")]
+        public string Input {
+            get {
+                return ((string)(this["Input"]));
+            }
+            set {
+                this["Input"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("out.gif")]
+        public string Output {
+            get {
+                return ((string)(this["Output"]));
+            }
+            set {
+                this["Output"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public string Fps {
+            get {
+                return ((string)(this["Fps"]));
+            }
+            set {
+                this["Fps"] = value;
+            }
+        }
     }
 }

@@ -40,9 +40,9 @@
 		<Button x:Name="Button_Convert" Content="Convert" Margin="10,0,10,10" Click="Button_Convert_Click" Height="42" VerticalAlignment="Bottom"/>
 		<ProgressBar x:Name="ProgressBar" Margin="10,0,10,57" Height="14" VerticalAlignment="Bottom"/>
 		<TextBox x:Name="TextBox_Input" Height="23" Margin="10,38,30,0" TextWrapping="Wrap" Text="in.mp4" VerticalAlignment="Top" />
-		<RadioButton x:Name="RadioButton_StatsMode_Full" Content="Full" HorizontalAlignment="Left" Margin="226,109,0,0" VerticalAlignment="Top" Height="15" Width="36" IsChecked="True" GroupName="StatsMode"/>
+		<RadioButton x:Name="RadioButton_StatsMode_Full" Content="Full" HorizontalAlignment="Left" Margin="226,109,0,0" VerticalAlignment="Top" Height="15" Width="46" IsChecked="True" GroupName="StatsMode"/>
 		<RadioButton x:Name="RadioButton_StatsMode_Diff" Content="Diff (better for a static background)" HorizontalAlignment="Left" Margin="284,109,0,0" VerticalAlignment="Top" Height="15" Width="199" GroupName="StatsMode"/>
-		<RadioButton x:Name="RadioButton_DiffMode_None" Content="None" HorizontalAlignment="Left" Margin="226,201,0,0" VerticalAlignment="Top" Height="15" Width="46" RenderTransformOrigin="0.48,1.431" IsChecked="True" GroupName="DiffMode"/>
+		<RadioButton x:Name="RadioButton_DiffMode_None" Content="None" HorizontalAlignment="Left" Margin="226,201,0,0" VerticalAlignment="Top" Height="15" Width="53" RenderTransformOrigin="0.48,1.431" IsChecked="True" GroupName="DiffMode"/>
 		<RadioButton x:Name="RadioButton_DiffMode_Rectangle" Content="Rectangle (better when only some parts are moving)" HorizontalAlignment="Left" Margin="284,201,0,0" VerticalAlignment="Top" Height="15" Width="314" GroupName="DiffMode"/>
 		<Button Content="..." Margin="0,38,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Input_Click" HorizontalAlignment="Right" Width="15"/>
 		<Button Content="..." Margin="0,10,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Ffmpeg_Click" HorizontalAlignment="Right" Width="15"/>
