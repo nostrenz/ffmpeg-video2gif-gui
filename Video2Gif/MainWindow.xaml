@@ -54,8 +54,8 @@
 		</ComboBox>
 		<Label Content="diff may be better for a static background" HorizontalAlignment="Left" Margin="224,273,0,0" VerticalAlignment="Top"/>
 		<CheckBox x:Name="CheckBox_UsePalette" Content="Use a palette (better quality and can greatly reduce the file size)" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="455" Click="CheckBox_UsePalette_Clickl"/>
-		<Label Content="Resize type" HorizontalAlignment="Left" Margin="10,156,0,0" VerticalAlignment="Top" Height="26" Width="225" RenderTransformOrigin="0.376,0.182" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-		<ComboBox x:Name="ComboBox_ResizeType" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" Width="225" Height="26" SelectedIndex="0" VerticalContentAlignment="Center">
+		<Label Content="Resize type" HorizontalAlignment="Left" Margin="10,156,0,0" VerticalAlignment="Top" Height="26" Width="110" RenderTransformOrigin="0.376,0.182" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+		<ComboBox x:Name="ComboBox_ResizeType" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" Width="110" Height="26" SelectedIndex="0" VerticalContentAlignment="Center">
 			<System:String>bilinear</System:String>
 			<System:String>bicubic</System:String>
 			<System:String>experimental</System:String>
@@ -66,8 +66,8 @@
 			<System:String>lanczos</System:String>
 			<System:String>spline</System:String>
 		</ComboBox>
-		<Label Content="Curve preset" HorizontalAlignment="Left" Margin="240,156,0,0" VerticalAlignment="Top" Width="225" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-		<ComboBox x:Name="ComboBox_CurvePreset" HorizontalAlignment="Left" Margin="240,187,0,0" VerticalAlignment="Top" Width="225" Height="26" SelectedIndex="0" VerticalContentAlignment="Center">
+		<Label Content="Curve preset" HorizontalAlignment="Left" Margin="125,156,0,0" VerticalAlignment="Top" Width="110" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+		<ComboBox x:Name="ComboBox_CurvePreset" HorizontalAlignment="Left" Margin="125,187,0,0" VerticalAlignment="Top" Width="110" Height="26" SelectedIndex="0" VerticalContentAlignment="Center">
 			<System:String>none</System:String>
 			<System:String>color_negative</System:String>
 			<System:String>cross_process</System:String>
@@ -80,5 +80,7 @@
 			<System:String>strong_contrast</System:String>
 			<System:String>vintage</System:String>
 		</ComboBox>
+		<Label x:Name="Label_Speed" Content="Speed - lower is faster (1)" HorizontalAlignment="Left" Margin="240,156,0,0" VerticalAlignment="Top" Width="225" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+		<Slider x:Name="Slider_Speed" HorizontalAlignment="Left" Margin="240,191,0,0" VerticalAlignment="Top" Width="225" LargeChange="0.25" Value="1" Maximum="2" ValueChanged="Slider_Speed_ValueChanged"/>
 	</Grid>
 </Window>

@@ -234,6 +234,11 @@ namespace Video2Gif
 			get { return this.TextBox_Duration.Text; }
 		}
 
+		private string Speed
+		{
+			get { return Math.Round(this.Slider_Speed.Value, 2).ToString().Replace(",", "."); }
+		}
+
 		#endregion Accessor
 
 		/*
@@ -279,8 +284,8 @@ namespace Video2Gif
 
 			// More filters here: https://ffmpeg.org/ffmpeg-filters.html#Video-Filters
 			this.filters = String.Format(
-				"curves={0},fps={1},scale={2}:-1:flags={3}",
-				this.CurvePreset, this.Fps, this.SizeWidth, this.ResizeType
+				"setpts={0}*PTS,curves={1},fps={2},scale={3}:-1:flags={4}",
+				this.Speed, this.CurvePreset, this.Fps, this.SizeWidth, this.ResizeType
 			);
 
 			// Use a palette
@@ -395,6 +400,16 @@ namespace Video2Gif
 			this.RadioButton_DiffMode_None.IsEnabled = usePalette;
 			this.RadioButton_DiffMode_Rectangle.IsEnabled = usePalette;
 			this.CheckBox_New.IsEnabled = usePalette;
+		}
+
+		/// <summary>
+		/// Called when the value of the speed slider changes.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Slider_Speed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+		{
+			this.Label_Speed.Content = "Speed - lower is faster (" + this.Speed + ")";
 		}
 
 		#endregion Event
