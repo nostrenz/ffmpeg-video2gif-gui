@@ -90,12 +90,21 @@ namespace Video2Gif
 		/// A palette needs to be created first using CreatePalette().
 		/// </summary>
 		/// <param name="filters"></param>
-		private void CreateGif(string filters)
+		private void CreateGif(string filters, bool usePalette=false)
 		{
-			string arguments = String.Format(
-				firstPart + @"-i ""{0}"" -lavfi ""{1}[x]; [x] [1:v] {2}"" -y ""{3}""",
-				this.PalettePath, filters, this.paletteUse, this.output
-			);
+			string arguments = null;
+
+			if (usePalette) {
+				arguments = String.Format(
+					firstPart + @"-i ""{0}"" -lavfi ""{1}[x]; [x] [1:v] {2}"" -y ""{3}""",
+					this.PalettePath, filters, this.paletteUse, this.output
+				);
+			} else {
+				arguments = String.Format(
+					firstPart + @"-lavfi ""{0}"" -y ""{1}""",
+					filters, this.output
+				);
+			}
 
 			this.AddpendLogBox(Settings.Default.FFmpeg + " " + arguments);
 			this.StartFfmpeg(arguments, new EventHandler(this.Gif_Created));
@@ -189,25 +198,32 @@ namespace Video2Gif
 			// More filters here: https://ffmpeg.org/ffmpeg-all.html#toc-Video-Filters
 			this.filters = "fps=" + this.TextBox_Fps.Text + ",scale=" + this.TextBox_Width.Text + ":-1:flags=lanczos";
 
-			// "bayer:bayer_scale=$USE_BAYERSCALE", "floyd_steinberg", "sierra2", "sierra2_4a" (default), "none", "heckbert" (not recommended)
-			string dither = this.ComboBox_Dither.SelectedValue.ToString();
+			// Use a palette
+			if ((bool)this.CheckBox_UsePalette.IsChecked) {
+				// "bayer:bayer_scale=$USE_BAYERSCALE", "floyd_steinberg", "sierra2", "sierra2_4a" (default), "none", "heckbert" (not recommended)
+				string dither = this.ComboBox_Dither.SelectedValue.ToString();
 
-			// "rectangle" (better when only a part of the image is moving) or "none" (default)
-			string diffMode = (bool)this.RadioButton_DiffMode_Rectangle.IsChecked ? "rectangle" : "none";
+				// "rectangle" (better when only a part of the image is moving) or "none" (default)
+				string diffMode = (bool)this.RadioButton_DiffMode_Rectangle.IsChecked ? "rectangle" : "none";
 
-			if (dither == "bayer") {
-				// Only used when dither bayer, a number between 1 and 5, 1 more appearant and 5 is better quality
-				string bayerScale = this.ComboBox_BayerScale.SelectedValue.ToString();
+				if (dither == "bayer") {
+					// Only used when dither bayer, a number between 1 and 5, 1 more appearant and 5 is better quality
+					string bayerScale = this.ComboBox_BayerScale.SelectedValue.ToString();
 
-				dither += ":bayer_scale=" + bayerScale;
+					dither += ":bayer_scale=" + bayerScale;
+				}
+
+				this.paletteUse = String.Format(
+					"paletteuse=dither={0}:diff_mode={1}:new={2}",
+					dither, diffMode, (bool)this.CheckBox_New.IsChecked ? "1" : "0"
+				);
+
+				this.CreatePalette(startTime, duration, input, filters);
+			} else { // Do not use a palette
+				this.firstPart = String.Format(@"-ss {0} -t {1} -i ""{2}"" ", startTime, duration, input);
+
+				this.CreateGif(this.filters, false);
 			}
-
-			this.paletteUse = String.Format(
-				"paletteuse=dither={0}:diff_mode={1}:new={2}",
-				dither, diffMode, (bool)this.CheckBox_New.IsChecked ? "1" : "0"
-			);
-
-			this.CreatePalette(startTime, duration, input, filters);
 
 			this.TextBlock_Logs.Text = "";
 			this.Button_Convert.IsEnabled = false;
@@ -227,7 +243,7 @@ namespace Video2Gif
 				return;
 			}
 
-			this.CreateGif(this.filters);
+			this.CreateGif(this.filters, true);
 		}
 
 		/// <summary>
@@ -237,7 +253,11 @@ namespace Video2Gif
 		/// <param name="e"></param>
 		private void Gif_Created(object sender, EventArgs e)
 		{
-			File.Delete(this.PalettePath);
+			string palettePath = this.PalettePath;
+
+			if (File.Exists(palettePath)) {
+				File.Delete(palettePath);
+			}
 
 			Dispatcher.BeginInvoke(new Action(delegate {
 				this.ProgressBar.IsIndeterminate = false;
@@ -294,6 +314,23 @@ namespace Video2Gif
 		private void ComboBox_Dither_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
 			this.ComboBox_BayerScale.IsEnabled = (this.ComboBox_Dither.SelectedValue.ToString() == "bayer");
+		}
+
+		/// <summary>
+		/// Called when clicking the UsePalette checkbox.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void CheckBox_UsePalette_Clickl(object sender, RoutedEventArgs e)
+		{
+			bool usePalette = (bool)this.CheckBox_UsePalette.IsChecked;
+
+			this.ComboBox_StatsMode.IsEnabled = usePalette;
+			this.ComboBox_Dither.IsEnabled = usePalette;
+			this.ComboBox_Dither.IsEnabled = usePalette;
+			this.RadioButton_DiffMode_None.IsEnabled = usePalette;
+			this.RadioButton_DiffMode_Rectangle.IsEnabled = usePalette;
+			this.CheckBox_New.IsEnabled = usePalette;
 		}
 
 		#endregion Event
