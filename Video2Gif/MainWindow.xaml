@@ -9,7 +9,7 @@
         Title="Video2Gif" Height="576.055" Width="482.617" ResizeMode="CanMinimize">
 	<Grid>
 		<GroupBox Header="Palette" HorizontalAlignment="Left" Height="167" Margin="10,186,0,0" VerticalAlignment="Top" Width="450"/>
-		<TextBox x:Name="TextBox_FFmepg" Height="23" Margin="10,10,39,0" TextWrapping="Wrap" Text="ffmpeg.exe" VerticalAlignment="Top"/>
+		<TextBox x:Name="TextBox_FFmepg" Height="23" Margin="10,10,39,0" TextWrapping="NoWrap" Text="ffmpeg.exe" VerticalAlignment="Top"/>
 		<Element:NumericField x:Name="TextBox_Fps" HorizontalAlignment="Left" Height="26" Margin="10,125,0,0" Text="15" Number="15" VerticalAlignment="Top" Width="73" RenderTransformOrigin="0.443,0.406"/>
 		<Label Content="FPS" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="73" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 		<TextBox x:Name="TextBox_StartTime" HorizontalAlignment="Left" Height="26" Margin="88,125,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="73" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
@@ -18,7 +18,7 @@
 		<Label Content="Duration" HorizontalAlignment="Left" Margin="166,94,0,0" VerticalAlignment="Top" Width="73" Height="26" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 		<Element:NumericField x:Name="TextBox_Width" HorizontalAlignment="Left" Height="26" Margin="244,125,0,0" VerticalAlignment="Top" Width="73" Text="480" Number="480"/>
 		<Label Content="Width" HorizontalAlignment="Left" Margin="244,94,0,0" VerticalAlignment="Top" Width="73" Height="26" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-		<TextBox x:Name="TextBox_Output" Height="23" Margin="10,66,10,0" TextWrapping="Wrap" Text="out.gif" VerticalAlignment="Top"/>
+		<TextBox x:Name="TextBox_Output" Height="23" Margin="10,66,10,0" TextWrapping="NoWrap" Text="out.gif" VerticalAlignment="Top"/>
 		<Label Content="Stats mode" HorizontalAlignment="Left" Margin="16,209,0,0" VerticalAlignment="Top" Height="26" Width="71" RenderTransformOrigin="-0.012,0.785"/>
 		<ComboBox x:Name="ComboBox_BayerScale" HorizontalAlignment="Left" Margin="92,271,0,0" VerticalAlignment="Top" Width="127" Height="26" SelectedIndex="0" IsEnabled="False">
 			<System:String>1</System:String>
@@ -40,7 +40,7 @@
 		<Label Content="Diff mode" HorizontalAlignment="Left" Margin="16,302,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
 		<Button x:Name="Button_Convert" Content="Convert" Margin="10,0,10,10" Click="Button_Convert_Click" Height="42" VerticalAlignment="Bottom"/>
 		<ProgressBar x:Name="ProgressBar" Margin="10,0,10,57" Height="14" VerticalAlignment="Bottom"/>
-		<TextBox x:Name="TextBox_Input" Height="23" Margin="10,38,39,0" TextWrapping="Wrap" Text="in.mp4" VerticalAlignment="Top" />
+		<TextBox x:Name="TextBox_Input" Height="23" Margin="10,38,39,0" TextWrapping="NoWrap" Text="in.mp4" VerticalAlignment="Top" />
 		<RadioButton x:Name="RadioButton_DiffMode_None" Content="None" HorizontalAlignment="Left" Margin="88,308,0,0" VerticalAlignment="Top" Height="15" Width="53" RenderTransformOrigin="0.48,1.431" IsChecked="True" GroupName="DiffMode" IsEnabled="False"/>
 		<RadioButton x:Name="RadioButton_DiffMode_Rectangle" Content="Rectangle (better when only some parts are moving)" HorizontalAlignment="Left" Margin="146,308,0,0" VerticalAlignment="Top" Height="15" Width="314" GroupName="DiffMode" IsEnabled="False"/>
 		<Button Content="..." Margin="0,38,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Input_Click" HorizontalAlignment="Right" Width="24"/>
