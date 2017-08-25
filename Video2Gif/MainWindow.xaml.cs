@@ -71,7 +71,7 @@ namespace Video2Gif
 		/// <param name="filters"></param>
 		private void CreatePalette(string startTime, string duration, string input, string filters)
 		{
-			string statsMode = "diff"; // "full" or "diff" (better for static background with moving elements in front of it)
+			string statsMode = this.ComboBox_StatsMode.SelectedValue.ToString();
 			string paletteGen = "palettegen=stats_mode=" + statsMode;
 
 			this.firstPart = String.Format(@"-ss {0} -t {1} -i ""{2}"" ", startTime, duration, input);

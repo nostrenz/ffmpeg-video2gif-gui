@@ -18,16 +18,16 @@
 		<Element:NumericField x:Name="TextBox_Width" HorizontalAlignment="Left" Height="26" Margin="70,195,0,0" VerticalAlignment="Top" Width="73" Text="480" Number="480"/>
 		<Label Content="Width" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="55" Height="26"/>
 		<TextBox x:Name="TextBox_Output" Height="23" Margin="10,66,10,0" TextWrapping="Wrap" Text="out.gif" VerticalAlignment="Top"/>
-		<Label Content="Stats mode" HorizontalAlignment="Left" Margin="154,102,0,0" VerticalAlignment="Top" Height="26" Width="66" RenderTransformOrigin="-0.012,0.785"/>
-		<ComboBox x:Name="ComboBox_BayerScale" HorizontalAlignment="Left" Margin="225,164,0,0" VerticalAlignment="Top" Width="127" Height="26" SelectedIndex="0" IsEnabled="False">
+		<Label Content="Stats mode" HorizontalAlignment="Left" Margin="154,102,0,0" VerticalAlignment="Top" Height="26" Width="71" RenderTransformOrigin="-0.012,0.785"/>
+		<ComboBox x:Name="ComboBox_BayerScale" HorizontalAlignment="Left" Margin="230,164,0,0" VerticalAlignment="Top" Width="127" Height="26" SelectedIndex="0" IsEnabled="False">
 			<System:String>1</System:String>
 			<System:String>2</System:String>
 			<System:String>3</System:String>
 			<System:String>4</System:String>
 			<System:String>5</System:String>
 		</ComboBox>
-		<Label Content="Bayer scale" HorizontalAlignment="Left" Margin="154,164,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
-		<ComboBox x:Name="ComboBox_Dither" HorizontalAlignment="Left" Margin="225,133,0,0" VerticalAlignment="Top" Width="127" Height="26" SelectedIndex="0" SelectionChanged="ComboBox_Dither_SelectionChanged">
+		<Label Content="Bayer scale" HorizontalAlignment="Left" Margin="154,164,0,0" VerticalAlignment="Top" Height="26" Width="71"/>
+		<ComboBox x:Name="ComboBox_Dither" HorizontalAlignment="Left" Margin="230,133,0,0" VerticalAlignment="Top" Width="127" Height="26" SelectedIndex="0" SelectionChanged="ComboBox_Dither_SelectionChanged">
 			<System:String>none</System:String>
 			<System:String>bayer</System:String>
 			<System:String>floyd_steinberg</System:String>
@@ -35,18 +35,22 @@
 			<System:String>sierra2_4a</System:String>
 			<System:String>heckbert</System:String>
 		</ComboBox>
-		<Label Content="Dither" HorizontalAlignment="Left" Margin="154,133,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
+		<Label Content="Dither" HorizontalAlignment="Left" Margin="154,133,0,0" VerticalAlignment="Top" Height="26" Width="71"/>
 		<Label Content="Diff mode" HorizontalAlignment="Left" Margin="154,195,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
 		<Button x:Name="Button_Convert" Content="Convert" Margin="10,0,10,10" Click="Button_Convert_Click" Height="42" VerticalAlignment="Bottom"/>
 		<ProgressBar x:Name="ProgressBar" Margin="10,0,10,57" Height="14" VerticalAlignment="Bottom"/>
 		<TextBox x:Name="TextBox_Input" Height="23" Margin="10,38,30,0" TextWrapping="Wrap" Text="in.mp4" VerticalAlignment="Top" />
-		<RadioButton x:Name="RadioButton_StatsMode_Full" Content="Full" HorizontalAlignment="Left" Margin="226,109,0,0" VerticalAlignment="Top" Height="15" Width="46" IsChecked="True" GroupName="StatsMode"/>
-		<RadioButton x:Name="RadioButton_StatsMode_Diff" Content="Diff (better for a static background)" HorizontalAlignment="Left" Margin="284,109,0,0" VerticalAlignment="Top" Height="15" Width="199" GroupName="StatsMode"/>
 		<RadioButton x:Name="RadioButton_DiffMode_None" Content="None" HorizontalAlignment="Left" Margin="226,201,0,0" VerticalAlignment="Top" Height="15" Width="53" RenderTransformOrigin="0.48,1.431" IsChecked="True" GroupName="DiffMode"/>
 		<RadioButton x:Name="RadioButton_DiffMode_Rectangle" Content="Rectangle (better when only some parts are moving)" HorizontalAlignment="Left" Margin="284,201,0,0" VerticalAlignment="Top" Height="15" Width="314" GroupName="DiffMode"/>
 		<Button Content="..." Margin="0,38,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Input_Click" HorizontalAlignment="Right" Width="15"/>
 		<Button Content="..." Margin="0,10,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Ffmpeg_Click" HorizontalAlignment="Right" Width="15"/>
 		<TextBox x:Name="TextBlock_Logs" Margin="10,0,10,76" TextWrapping="Wrap" Foreground="White" Background="Black" Height="102" VerticalAlignment="Bottom" IsReadOnly="True"/>
 		<CheckBox x:Name="CheckBox_New" Content="Use a new palette for each frame" HorizontalAlignment="Left" Margin="159,226,0,0" VerticalAlignment="Top" Width="439"/>
+		<ComboBox x:Name="ComboBox_StatsMode" HorizontalAlignment="Left" Margin="230,102,0,0" VerticalAlignment="Top" Width="127" Height="26" SelectedIndex="0" SelectionChanged="ComboBox_Dither_SelectionChanged">
+			<System:String>full</System:String>
+			<System:String>diff</System:String>
+			<System:String>single</System:String>
+		</ComboBox>
+		<Label Content="diff may be better for a static background" HorizontalAlignment="Left" Margin="362,102,0,0" VerticalAlignment="Top"/>
 	</Grid>
 </Window>
