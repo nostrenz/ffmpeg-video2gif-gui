@@ -10,7 +10,7 @@
 	<Grid>
 		<GroupBox Header="Palette" HorizontalAlignment="Left" Height="167" Margin="10,250,0,0" VerticalAlignment="Top" Width="455"/>
 		<TextBox x:Name="TextBox_FFmepg" Height="23" Margin="10,10,39,0" TextWrapping="NoWrap" Text="ffmpeg.exe" VerticalAlignment="Top"/>
-		<Element:NumericField x:Name="TextBox_Fps" HorizontalAlignment="Left" Height="26" Margin="10,125,0,0" Text="15" Number="15" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.443,0.406"/>
+		<Element:NumericField x:Name="TextBox_Fps" HorizontalAlignment="Left" Height="26" Margin="10,125,0,0" Text="15" Number="15" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.443,0.406" Maximum="50"/>
 		<Label Content="FPS" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="110" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 		<TextBox x:Name="TextBox_StartTime" HorizontalAlignment="Left" Height="26" Margin="125,125,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Width="110" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 		<Label Content="Start (hh:mm:ss)" HorizontalAlignment="Left" Margin="125,94,0,0" VerticalAlignment="Top" Width="110" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
