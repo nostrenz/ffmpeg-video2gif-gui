@@ -6,7 +6,7 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Video2Gif.MainWindow"
 		xmlns:Element="clr-namespace:Video2Gif" 
         mc:Ignorable="d"
-        Title="Video2Gif" Height="447.614" Width="614.268" ResizeMode="CanMinimize">
+        Title="Video2Gif" Height="463.669" Width="614.268" ResizeMode="CanMinimize">
 	<Grid>
 		<TextBox x:Name="TextBox_FFmepg" Height="23" Margin="10,10,30,0" TextWrapping="Wrap" Text="ffmpeg.exe" VerticalAlignment="Top"/>
 		<Element:NumericField x:Name="TextBox_Fps" HorizontalAlignment="Left" Height="26" Margin="70,102,0,0" Text="15" Number="15" VerticalAlignment="Top" Width="73"/>
@@ -47,5 +47,6 @@
 		<Button Content="..." Margin="0,38,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Input_Click" HorizontalAlignment="Right" Width="15"/>
 		<Button Content="..." Margin="0,10,10,0" VerticalAlignment="Top" Height="23" Click="Button_Browse_Ffmpeg_Click" HorizontalAlignment="Right" Width="15"/>
 		<TextBox x:Name="TextBlock_Logs" Margin="10,0,10,76" TextWrapping="Wrap" Foreground="White" Background="Black" Height="102" VerticalAlignment="Bottom" IsReadOnly="True"/>
+		<CheckBox x:Name="CheckBox_New" Content="Use a new palette for each frame" HorizontalAlignment="Left" Margin="159,226,0,0" VerticalAlignment="Top" Width="439"/>
 	</Grid>
 </Window>

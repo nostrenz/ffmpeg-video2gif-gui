@@ -200,7 +200,10 @@ namespace Video2Gif
 				dither += ":bayer_scale=" + bayerScale;
 			}
 
-			this.paletteUse = String.Format("paletteuse=dither={0}:diff_mode={1}", dither, diffMode);
+			this.paletteUse = String.Format(
+				"paletteuse=dither={0}:diff_mode={1}:new={2}",
+				dither, diffMode, (bool)this.CheckBox_New.IsChecked ? "1" : "0"
+			);
 
 			this.CreatePalette(startTime, duration, input, filters);
 
