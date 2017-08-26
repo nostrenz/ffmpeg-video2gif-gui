@@ -409,7 +409,7 @@ namespace Video2Gif
 		/// <param name="e"></param>
 		private void Slider_Speed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
-			this.Label_Speed.Content = "Speed - lower is faster (" + this.Speed + ")";
+			this.Label_Speed.Content = "PTS multiplier - lower is faster (" + this.Speed + ")";
 		}
 
 		#endregion Event

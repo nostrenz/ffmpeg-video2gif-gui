@@ -80,7 +80,7 @@
 			<System:String>strong_contrast</System:String>
 			<System:String>vintage</System:String>
 		</ComboBox>
-		<Label x:Name="Label_Speed" Content="Speed - lower is faster (1)" HorizontalAlignment="Left" Margin="240,156,0,0" VerticalAlignment="Top" Width="225" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+		<Label x:Name="Label_Speed" Content="PTS multiplier - lower is faster (1)" HorizontalAlignment="Left" Margin="240,156,0,0" VerticalAlignment="Top" Width="225" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 		<Slider x:Name="Slider_Speed" HorizontalAlignment="Left" Margin="240,191,0,0" VerticalAlignment="Top" Width="225" LargeChange="0.25" Value="1" Maximum="2" ValueChanged="Slider_Speed_ValueChanged"/>
 	</Grid>
 </Window>
