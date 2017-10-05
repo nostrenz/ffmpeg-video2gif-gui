@@ -364,7 +364,7 @@ namespace Video2Gif
 		/// <param name="e"></param>
 		private void Button_Browse_Input_Click(object sender, RoutedEventArgs e)
 		{
-			string file = this.SelectFile("Video file|*.mp4;*.mkv;*.avi;*.mov");
+			string file = this.SelectFile("Video file|*.mkv;*.webm;*.mp4;*.avi;*.mov");
 
 			if (file != null) {
 				this.TextBox_Input.Text = file;
