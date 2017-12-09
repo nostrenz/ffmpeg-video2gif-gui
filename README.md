@@ -2,6 +2,8 @@
 
 A simple Windows GUI utility for converting videos into gifs using FFmpeg.
 
+![Main window](https://raw.githubusercontent.com/nostrenz/ffmpeg-video2gif-gui/master/screenshots/window.png)
+
 ## How to use
 
 * Download FFmpeg for Windows here http://ffmpeg.zeranoe.com/builds/ and extract it anywhere you want;
