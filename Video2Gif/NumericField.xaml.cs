@@ -96,7 +96,6 @@ namespace Video2Gif
 				return;
 			}
 
-			//int parsed = int.Parse(this.TextBox_Counter.Text);
 			int parsed = this.number;
 			bool success = int.TryParse(this.textbox.Text, out parsed);
 
